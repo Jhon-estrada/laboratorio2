@@ -1,1 +1,31 @@
+#include<iostream>
+using namespace std;
 
+class complejo{
+  private:
+  double real_part;
+  double img_part;
+  public:
+  complejo();
+  complejo(float = 0, float = 0);
+  complejo(const complejo&);
+  ~complejo();
+  void recibe();
+  float real();
+  float imaginaria();
+  void suma(float, float, float, float, float);
+  void resta(float, float, float, float, float);
+  void multiplicacion(float, float, float, float);
+  void division(float, float,float, float);
+  
+
+
+};
+
+
+
+
+
+int main() {
+  cout << " ";
+}
