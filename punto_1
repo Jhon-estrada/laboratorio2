@@ -1,3 +1,4 @@
+
 #include<iostream>
 using namespace std;
 
@@ -8,24 +9,30 @@ class complejo{
   public:
   complejo();
   complejo(float = 0, float = 0);
+  //{real_part = r; img_part = i;}
   complejo(const complejo&);
   ~complejo();
   void recibe();
+  void impresion();
   float real();
   float imaginaria();
   void suma(float, float, float, float, float);
   void resta(float, float, float, float, float);
   void multiplicacion(float, float, float, float);
   void division(float, float,float, float);
+  friend ostream & operator << (ostream &out, const complejo &c);
+  friend istream & operator >> (istream &in,  complejo &c);
   
-
-
 };
 
+complejo::complejo(float a, float b){
+  real_part = a;
+  img_part = b;
 
-
-
-
-int main() {
-  cout << " ";
+}
+ostream & operator << (ostream &out, const complejo &c)
+{
+    out << c.real_part;
+    out << "+i" << c.img_part << endl;
+    return out;
 }
