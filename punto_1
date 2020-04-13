@@ -8,7 +8,7 @@ class complejo{
   double img_part;
   public:
   complejo();
-  complejo(float = 0, float = 0);
+  complejo(float r = 0, float i = 0);
   //{real_part = r; img_part = i;}
   complejo(const complejo&);
   ~complejo();
@@ -16,9 +16,9 @@ class complejo{
   void impresion();
   float real();
   float imaginaria();
-  void suma(float, float, float, float, float);
-  void resta(float, float, float, float, float);
-  void multiplicacion(float, float, float, float);
+  void suma(float, float, float, float);
+  void resta(float, float, float, float);
+  void multiplicacion(float, float, float);
   void division(float, float,float, float);
   friend ostream & operator << (ostream &out, const complejo &c);
   friend istream & operator >> (istream &in,  complejo &c);
@@ -30,9 +30,67 @@ complejo::complejo(float a, float b){
   img_part = b;
 
 }
+void complejo::recibe() 
+   {          
+   cout << "\nIntroduzca la parte real del numero: " << endl;
+   cin >> real_part;
+   cout << "\nIntroduzca la parte compleja del numero: " << endl;
+   cin >> img_part;
+   }
+
+   float complejo::real()
+  {
+   return real_part;
+  }
+
+  float complejo::imaginaria()
+
+  {
+   return img_part;
+  } 
+
+
+void complejo::suma(float a, float b, float d, float e){
+  cout <<"\n La suma de los numeros es:  ( "  << a + d
+       << " , " << b + e
+       <<" )" << endl;
+
+}
+
+
 ostream & operator << (ostream &out, const complejo &c)
 {
     out << c.real_part;
     out << "+i" << c.img_part << endl;
     return out;
+}
+istream & operator >> (istream &in,  complejo &c)
+{
+    //cout << "ingresar parte real ";
+    in >> c.real_part;
+    //cout << "ingresar parte imaginaria ";
+    in >> c.img_part;
+    return in;
+}
+
+
+
+int main(){
+
+
+  complejo c1;
+  cin >> c1;
+  cout << "el objeto complejo es: ";
+  cout << c1;
+
+  return 0;
+  /*complejo s;
+  complejo x;
+  complejo y;
+
+  x.recibe();
+  y.recibe();
+  s.suma(x.real(), x.imaginaria(), y.real(), y.imaginaria());
+  return 0;*/
+
 }
