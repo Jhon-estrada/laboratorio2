@@ -1,4 +1,3 @@
-
 #include<iostream>
 using namespace std;
 
@@ -9,9 +8,9 @@ class complejo{
   public:
   complejo();
   complejo(float r = 0, float i = 0);
-  //{real_part = r; img_part = i;}
+  
   complejo(const complejo&);
-  ~complejo();
+  //~complejo();
   void recibe();
   void impresion();
   float real();
@@ -20,18 +19,41 @@ class complejo{
   void resta(float, float, float, float);
   void multiplicacion(float, float, float);
   void division(float, float,float, float);
+  complejo operator ~();
   friend ostream & operator << (ostream &out, const complejo &c);
   friend istream & operator >> (istream &in,  complejo &c);
-  
+  friend complejo operator + (const complejo &p1,const complejo &p2);
+  friend complejo operator * (const complejo &p1,const complejo &p2);
 };
+complejo complejo::operator ~ ()
+{
+  img_part*=-1;
+  return *this;
+}
+complejo operator + (const complejo &p1,const complejo &p2)
+{
+  complejo c3(p1.real_part+p2.real_part,p1.img_part+p2.img_part);
+  return c3;
+}
 
+complejo operator * (const complejo &p1,const complejo &p2)
+{
+  complejo c3((p1.real_part*p2.real_part)-(p1.img_part*p2.img_part),(p1.real_part*p2.img_part)+(p1.img_part*p2.real_part));
+  return c3;
+}
+
+complejo::complejo(const complejo&a){
+  real_part = a.real_part;
+  img_part = a.img_part;
+
+}
 complejo::complejo(float a, float b){
   real_part = a;
   img_part = b;
 
 }
-void complejo::recibe() 
-   {          
+void complejo::recibe()
+   {
    cout << "\nIntroduzca la parte real del numero: " << endl;
    cin >> real_part;
    cout << "\nIntroduzca la parte compleja del numero: " << endl;
@@ -47,7 +69,7 @@ void complejo::recibe()
 
   {
    return img_part;
-  } 
+  }
 
 
 void complejo::suma(float a, float b, float d, float e){
@@ -56,6 +78,7 @@ void complejo::suma(float a, float b, float d, float e){
        <<" )" << endl;
 
 }
+
 
 
 ostream & operator << (ostream &out, const complejo &c)
@@ -76,21 +99,26 @@ istream & operator >> (istream &in,  complejo &c)
 
 
 int main(){
+    //* saca lel valor de una dirección de memoria, & saca la direccion de memoria de una variable
+    int *a; //A tiene la direccion de memoria
+    int b=4;
+    cout<<b<<endl;
+    a=&b; //direccion de memoria de b
+    *a=6;
+    cout<<b<<endl;
 
-
-  complejo c1;
-  cin >> c1;
+  complejo c1(1,2);
+  complejo c2(3,4);
+  //cin >> c1;
   cout << "el objeto complejo es: ";
   cout << c1;
+  complejo c3=c1+c2;
 
+  cout << "el objeto complejo es: ";
+  cout << c3;
+  cout << "el objeto complejo conjugado es: ";
+  cout << ~c3;
   return 0;
-  /*complejo s;
-  complejo x;
-  complejo y;
-
-  x.recibe();
-  y.recibe();
-  s.suma(x.real(), x.imaginaria(), y.real(), y.imaginaria());
-  return 0;*/
+  
 
 }
