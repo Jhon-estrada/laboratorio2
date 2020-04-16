@@ -1,5 +1,7 @@
 #include<iostream>
+#include <math.h>
 using namespace std;
+
 
 class complejo{
   private:
@@ -8,22 +10,24 @@ class complejo{
   public:
   complejo();
   complejo(float r = 0, float i = 0);
-  
+
   complejo(const complejo&);
   //~complejo();
   void recibe();
   void impresion();
   float real();
   float imaginaria();
-  void suma(float, float, float, float);
-  void resta(float, float, float, float);
-  void multiplicacion(float, float, float);
-  void division(float, float,float, float);
+  
+  
+  
+  
   complejo operator ~();
   friend ostream & operator << (ostream &out, const complejo &c);
   friend istream & operator >> (istream &in,  complejo &c);
   friend complejo operator + (const complejo &p1,const complejo &p2);
+  friend complejo operator - (const complejo &p1,const complejo &p2);
   friend complejo operator * (const complejo &p1,const complejo &p2);
+  friend complejo operator / (const complejo &p1,const complejo &p2);
 };
 complejo complejo::operator ~ ()
 {
@@ -35,10 +39,20 @@ complejo operator + (const complejo &p1,const complejo &p2)
   complejo c3(p1.real_part+p2.real_part,p1.img_part+p2.img_part);
   return c3;
 }
+complejo operator - (const complejo &p1,const complejo &p2)
+{
+  complejo c3(p1.real_part-p2.real_part,p1.img_part-p2.img_part);
+  return c3;
+}
 
 complejo operator * (const complejo &p1,const complejo &p2)
 {
   complejo c3((p1.real_part*p2.real_part)-(p1.img_part*p2.img_part),(p1.real_part*p2.img_part)+(p1.img_part*p2.real_part));
+  return c3;
+}
+complejo operator / (const complejo &p1,const complejo &p2)
+{
+  complejo c3((p1.real_part*p2.real_part)+(p1.img_part*p2.real_part),(p1.img_part*p2.real_part)-(p1.real_part*p2.img_part)/(p2.real_part^2+p2.img_part));
   return c3;
 }
 
@@ -72,19 +86,12 @@ void complejo::recibe()
   }
 
 
-void complejo::suma(float a, float b, float d, float e){
-  cout <<"\n La suma de los numeros es:  ( "  << a + d
-       << " , " << b + e
-       <<" )" << endl;
-
-}
-
 
 
 ostream & operator << (ostream &out, const complejo &c)
 {
     out << c.real_part;
-    out << "+i" << c.img_part << endl;
+    out <<"+i" << c.img_part << endl;
     return out;
 }
 istream & operator >> (istream &in,  complejo &c)
@@ -99,13 +106,6 @@ istream & operator >> (istream &in,  complejo &c)
 
 
 int main(){
-    //* saca lel valor de una dirección de memoria, & saca la direccion de memoria de una variable
-    int *a; //A tiene la direccion de memoria
-    int b=4;
-    cout<<b<<endl;
-    a=&b; //direccion de memoria de b
-    *a=6;
-    cout<<b<<endl;
 
   complejo c1(1,2);
   complejo c2(3,4);
@@ -119,6 +119,6 @@ int main(){
   cout << "el objeto complejo conjugado es: ";
   cout << ~c3;
   return 0;
-  
+
 
 }
