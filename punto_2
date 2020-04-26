@@ -1,1 +1,80 @@
+#include<iostream>
+#include <math.h>
+using namespace std;
+const double PI= 3.141592;
+class vertice{
+    public:
+    const double x, y;
+    vertice();
+    vertice( double a=0, double b=0);
+    vertice(const vertice&);
+};
+
+class circulo{
+
+    vertice vertice1;
+
+    circulo(double x, double y);
+    circulo(const circulo&) = delete;
+public:
+
+    double perimetro();
+    double area();
+
+    static circulo makeCirculo(double x, double y){
+
+        return circulo(x,y);
+
+    }
+
+};
+double circulo::perimetro(){
+    vertice vertice1;
+    circulo(double x, double y);
+    getr=sqrt(y+x)
+    double result = 2*PI*getr;
+    return result;
+}
+
+class triangulo{
+    vertice vertice1;
+    vertice vertice2;
+    triangulo( vertice a, vertice b);
+    triangulo(const triangulo&) = delete;
+
+};
+
+class pentagono{
+    vertice vertice1;
+    vertice vertice2;
+    pentagono(vertice a, vertice b);
+    pentagono(const pentagono&) = delete;
+
+
+};
+
+class hexagono{
+    vertice vertice1;
+    vertice vertice2;
+    hexagono(vertice a, vertice b);
+    hexagono(const hexagono&) = delete;
+
+};
+class rectangulo{
+    vertice vertice1;
+    vertice vertice2;
+    vertice vertice3;
+    rectangulo(vertice a, vertice b);
+    rectangulo(const rectangulo&) = delete;
+
+
+
+
+};
+
+int main()
+{
+    cout << " " << endl;
+    return 0;
+}
 
