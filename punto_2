@@ -1,57 +1,207 @@
 #include<iostream>
 #include <math.h>
 using namespace std;
-const double PI= 3.141592;
+
 class vertice{
     public:
-    const double x, y;
+    double x, y;
     vertice();
-    vertice( double a=0, double b=0);
-    vertice(const vertice&);
+    void devuelveCoordenadas () const;
+    vertice( double x, double y);
+    vertice(const vertice &V);
+    void setX(double x2);
+    void setY(double y2);
+    double getX();
+    double getY();
+    double getdistancia(vertice vect1, vertice vect2);
 };
+vertice::vertice()
+{
+    x= 0;
+    y = 0;
+
+}
+vertice::vertice(double x2, double y2){
+    setX(x2);
+    setY(y2);
+}
+vertice::vertice(const vertice&V):x(V.x), y(V.y){
+
+}
+
+void vertice::setX(double x2){x= x2;}
+
+void vertice:: setY(double y2){y = y2;}
+
+double vertice:: getX(){return x;}
+
+double vertice :: getY(){return y;}
+
+void vertice::devuelveCoordenadas()const{
+    cout<<"Coordenada x: "<<x<<", Coordenada y: "<<y<<endl;
+}
+double vertice::getdistancia(vertice vect1, vertice vect2){
+    double a;
+    a = sqrt(pow(vect2.getX()-vect1.getX(),2)+pow(vect2.getY()-vect1.getY(),2));
+    return a;
+}
+
+
+
 
 class circulo{
 
     vertice vertice1;
+    double r;
 
-    circulo(double x, double y);
-    circulo(const circulo&) = delete;
+    circulo(double x, double y, double radio);
+    circulo() = delete;
 public:
 
     double perimetro();
     double area();
-
-    static circulo makeCirculo(double x, double y){
-
-        return circulo(x,y);
-
+    double getRad();
+    void setRad(double radio);
+    static circulo makecirculo( double x, double y, double radio){
+        return circulo(x,y,radio);
     }
 
+
 };
+circulo::circulo(double x, double y, double radio)
+{
+    vertice1 = vertice (x,y);
+    vertice v = vertice(0,0);
+    setRad(vertice1.getdistancia(vertice1,v));
+
+}
+double circulo::getRad(){
+    return r;
+}
+void circulo::setRad(double radio){
+    r = radio;
+}
 double circulo::perimetro(){
-    vertice vertice1;
-    circulo(double x, double y);
-    getr=sqrt(y+x)
-    double result = 2*PI*getr;
+    double result = 2*3.1416*getRad();
+    return result;
+}
+double circulo::area(){
+    double result = 3.1416*getRad()*getRad();
     return result;
 }
 
+
 class triangulo{
+    double tr1, tr2, tr3;
     vertice vertice1;
     vertice vertice2;
-    triangulo( vertice a, vertice b);
-    triangulo(const triangulo&) = delete;
+    vertice vertice3;
+
+    triangulo(int x1,int y1,int x2,int y2, int x3,int y3);
+    triangulo () = delete;
+public:
+    double perimetro();
+    double area();
+    double getsidelad1();
+    double getsidelad2();
+    double getsidelad3();
+
+    static triangulo maketriangulo(int x1,int y1,int x2,int y2, int x3,int y3){
+        return triangulo(x1,y1,x2,y2,x3,y3);
+    }
+
 
 };
+
+triangulo::triangulo(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+    vertice1.setX(x1);
+    vertice1.setY(y1);
+    vertice2.setX(x2);
+    vertice2.setY(y2);
+    vertice3.setX(x3);
+    vertice3.setY(y3);
+    tr1 = vertice1.getdistancia(vertice1,vertice2);
+    tr2 = vertice2.getdistancia(vertice2,vertice3);
+    tr3 = vertice3.getdistancia(vertice3,vertice1);
+
+}
+
+double triangulo::perimetro()
+{
+    double pr = tr1+tr2+tr3;
+        return pr;
+}
+
+double triangulo::area()
+{
+    double ar =sqrt((tr1+tr2+tr3/2)*((tr1+tr2+tr3/2)-(tr1))*((tr1+tr2+tr3/2)-(tr2))*((tr1+tr2+tr3/2)-(tr3)));
+        return ar;
+}
+
+double triangulo::getsidelad1()
+{
+   return tr1;
+}
+
+double triangulo::getsidelad2()
+{
+    return tr2;
+}
+
+double triangulo::getsidelad3()
+{
+  return tr3;
+}
 
 class pentagono{
     vertice vertice1;
     vertice vertice2;
-    pentagono(vertice a, vertice b);
-    pentagono(const pentagono&) = delete;
 
+    double pen;
+    pentagono(int x1,int y1,int x2,int y2);
+    pentagono () = delete;
+public:
+    double perimetro();
+    double area();
+    double getpenlado();
+
+    static pentagono makepentagono(int x1,int y1,int x2,int y2){
+        return pentagono( x1, y1,x2,y2);
+    }
 
 };
+
+pentagono::pentagono(int x1, int y1, int x2, int y2)
+{
+    vertice1.setX(x1);
+    vertice1.setY(y1);
+    vertice2.setX(x2);
+    vertice2.setY(y2);
+    pen = vertice1.getdistancia(vertice1,vertice2);
+
+}
+
+double pentagono::perimetro()
+{
+   double resultados=5*pen;
+   return resultados;
+
+}
+
+double pentagono::area()
+
+{
+    double are = (pen*5*(pen/1.45))/2;
+    return are;
+
+}
+
+double pentagono::getpenlado()
+{
+    return pen;
+}
+
 
 class hexagono{
     vertice vertice1;
@@ -64,17 +214,102 @@ class rectangulo{
     vertice vertice1;
     vertice vertice2;
     vertice vertice3;
-    rectangulo(vertice a, vertice b);
-    rectangulo(const rectangulo&) = delete;
+    vertice vertice4;
 
+    double rec1, rec2, rec3;
+    rectangulo(int x1,int y1,int x2,int y2, int x3,int y3);
+    rectangulo ( ) = delete;
+public:
+    double perimetro();
+    double area();
+    double getrecvert();
+    double getrechorz();
 
-
+    static rectangulo makerectangulo(int x1,int y1,int x2,int y2, int x3,int y3){
+        return rectangulo(x1,y1,x2,y2,x3,y3);
+    }
 
 };
 
-int main()
+rectangulo::rectangulo(int x1, int y1, int x2, int y2, int x3, int y3)
 {
-    cout << " " << endl;
-    return 0;
+    vertice1.setX(x1);
+    vertice1.setY(y1);
+    vertice2.setX(x2);
+    vertice2.setY(y2);
+    vertice3.setX(x3);
+    vertice3.setY(y3);
+
+    rec1 = vertice1.getdistancia(vertice1,vertice2);
+    rec2 = vertice2.getdistancia(vertice1,vertice3);
+
+
 }
 
+double rectangulo::perimetro()
+{
+    double resultado  = 2*(rec1+rec2);
+    return resultado;
+{
+   return rec1;
+}
+
+double rectangulo::getrechorz()
+{
+    return rec2;
+}
+
+
+
+class ConstructorFigura{
+public:
+    static circulo builder(vertice vertice1){}
+    static triangulo builder(vertice vertice1,vertice vertice2,vertice vertice3){}
+    static rectangulo builder(vertice vertice1,vertice vertice2,vertice vertice3,vertice vertice4){}
+    //static pentagono builder(vertice vertice1,vertice vertice2){}
+
+};
+static circulo builder(vertice vertice1){
+    circulo circulo = circulo::makecirculo(vertice1.getX(),vertice1.getY(),sqrt(pow(vertice1.getX(),2)+pow(vertice1.getY(),2)));
+    cout<<"Perimetro del circulo: "<<circulo.perimetro()<<"\nArea del circulo: "<<circulo.area()<<endl;
+    return circulo;
+};
+static triangulo builder(vertice v1,vertice v2,vertice v3, vertice v4){
+    triangulo triangulo = triangulo::maketriangulo(v1.getX(),v1.getY(),v2.getX(),v2.getY(),v3.getX(),v3.getY());
+    cout<<"Perimetro del triangulo: "<<triangulo.perimetro()<<"\nArea del triangulo: "<<triangulo.area()<<endl;
+    return triangulo;
+};
+static rectangulo builder(vertice v1,vertice v2,vertice v3 ){
+    rectangulo rectangulo= rectangulo::makerectangulo(v1.getX(),v1.getY(),v2.getX(),v2.getY(),v3.getX(),v3.getY());
+    cout<<"Perimetro del rectangulo: "<<rectangulo.perimetro()<<"\nArea del rectangulo: "<<rectangulo.area()<<endl;
+    return rectangulo;
+
+};
+/*static pentagono builder(vertice v1,vertice v2 ){
+    pentagono pentagono = pentagono::makepentagono(v1.getX(),v1.getY(),v2.getX(),v2.getY());
+    cout<<"Perimetro del pentagono: "<<pentagono.perimetro()<<"\nArea del pentagono: "<<pentagono.area()<<endl;
+    return pentagono;
+};*/
+int main()
+{
+    //vertice vertice(9,5);
+    //builder(vertice);
+    /*
+    vertice vertice1(4,5);
+    vertice vertice2(6,7);
+    vertice vertice3(8,8);
+    builder(vertice1,vertice2,vertice3);*/
+   /*
+    vertice vertice1(3,4);
+    vertice vertice2(5,6);
+
+    vertice vertice3(1,2);
+    builder(vertice1,vertice2,vertice3);*/
+
+    vertice vertice1(3,4);
+    vertice vertice2(5,6);
+    builder(vertice1,vertice2);
+    
+    
+
+}
