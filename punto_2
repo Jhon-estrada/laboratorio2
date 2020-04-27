@@ -206,45 +206,48 @@ double pentagono::getpenlado()
 class hexagono{
     vertice vertice1;
     vertice vertice2;
-    double hex;
-    hexagono(int x1,int y1,int x2,int y2);
+    double hex_;
+    hexagono (double hex);
+
     hexagono() = delete;
 public:
     double perimetro();
     double area();
     double gethexlado();
+
+    static hexagono makehexagono(double hex){
+
+
+
     
-    static hexagono makehexagono(int x1,int y1,int x2,int y2){
-        
-        return hexagono(x1, y1,x2,y2);
+
+        return hexagono(hex);
     }
 
 };
 
-hexagono::hexagono(int x1, int y1, int x2, int y2)
+
+hexagono::hexagono(double hex)
 {
-    vertice1.setX(x1);
-    vertice1.setY(y1);
-    vertice2.setX(x2);
-    vertice2.setY(y2);
-    hex = vertice1.getdistancia(vertice1,vertice2);  
+    hex_ = hex;
+    
 }
 double hexagono::perimetro()
 {
-   double resultados=6*hex;
+   double resultados=6*hex_;
    return resultados;
 
 }
 double hexagono::area()
 
 {
-    double are = (hex*6*(hex/1.45))/2;
+    double are = (hex_*6*(hex_/1.45))/2;
     return are;
 
 }
 double hexagono::gethexlado()
 {
-    return hex;
+    return hex_;
 }
 
 
@@ -317,7 +320,8 @@ public:
     static triangulo builder(vertice vertice1,vertice vertice2,vertice vertice3){}
     static rectangulo builder(vertice vertice1,vertice vertice2,vertice vertice3,vertice vertice4){}
     static pentagono builder(vertice vertice1,vertice vertice2){}
-    static hexagono builder(vertice vertice1,vertice vertice2){}
+   
+    static hexagono builder(double hex){}
 
 };
 static circulo builder(vertice vertice1){
@@ -341,20 +345,27 @@ static pentagono builder(vertice v1,vertice v2 ){
     cout<<"Perimetro del pentagono: "<<pentagono.perimetro()<<"\nArea del pentagono: "<<pentagono.area()<<endl;
     return pentagono;
    };
-static hexagono builder(vertice v1,vertice v2 ){
-    hexagono hexagono = hexagono::makehexagono(v1.getX(),v1.getY(),v2.getX(),v2.getY());
-    cout<<"Perimetro del hexagono: "<<hexagono.perimetro()<<"\nArea del hexagono: "<<hexagono.area()<<endl;
+
+static hexagono builder(double hex ){
+    hexagono hexagono = hexagono::makehexagono(hex);
+    cout<<"Perimetro del hexagono: "<<hexagono.perimetro()<<"\nArea del hexago: "<<hexagono.area()<<endl;
     return hexagono;
-   };
+};
+
 int main()
 {
-    //vertice vertice(9,5);
-    //builder(vertice);
+    //IMPRESION CIRCULO
+    /*vertice vertice(9,5);
+    builder(vertice);*/
+
+    //IMPRESION TRIANGULO
     /*
     vertice vertice1(4,5);
     vertice vertice2(6,7);
     vertice vertice3(8,8);
     builder(vertice1,vertice2,vertice3);*/
+
+    //IMPRESION RECTANGULO
    /*
     vertice vertice1(3,4);
     vertice vertice2(5,6);
@@ -362,9 +373,12 @@ int main()
     vertice vertice3(1,2);
     builder(vertice1,vertice2,vertice3);*/
 
-    vertice vertice1(3,4);
-    vertice vertice2(5,6);
-    builder(vertice1,vertice2);
+    //IMPRESION PENTAGONO
 
+    /*vertice vertice1(3,4);
+    vertice vertice2(5,6);
+    builder(vertice1,vertice2);*/
+    //IMPRECION HEXAGONO
+    builder(8);
 
 }
