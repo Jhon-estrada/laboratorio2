@@ -17,10 +17,10 @@ class complejo{
   void impresion();
   float real();
   float imaginaria();
-  
-  
-  
-  
+
+
+
+
   complejo operator ~();
   friend ostream & operator << (ostream &out, const complejo &c);
   friend istream & operator >> (istream &in,  complejo &c);
@@ -41,8 +41,8 @@ complejo operator + (const complejo &p1,const complejo &p2)
 }
 complejo operator - (const complejo &p1,const complejo &p2)
 {
-  complejo c3(p1.real_part-p2.real_part,p1.img_part-p2.img_part);
-  return c3;
+  complejo c2(p1.real_part-p2.real_part,p1.img_part-p2.img_part);
+  return c2;
 }
 
 complejo operator * (const complejo &p1,const complejo &p2)
@@ -52,7 +52,9 @@ complejo operator * (const complejo &p1,const complejo &p2)
 }
 complejo operator / (const complejo &p1,const complejo &p2)
 {
-  complejo c3((p1.real_part*p2.real_part)+(p1.img_part*p2.real_part),(p1.img_part*p2.real_part)-(p1.real_part*p2.img_part)/(p2.real_part^2+p2.img_part));
+    
+    complejo c3((p1.real_part*p2.real_part)+(p1.img_part*p2.real_part),(p1.img_part*p2.real_part)-(p1.real_part*p2.img_part)/
+                pow(p2.real_part,2)+pow(p2.img_part,2));
   return c3;
 }
 
@@ -107,18 +109,23 @@ istream & operator >> (istream &in,  complejo &c)
 
 int main(){
 
-  complejo c1(1,2);
-  complejo c2(3,4);
+    complejo c1(1,2);
+    complejo c2(3,4);
   //cin >> c1;
-  cout << "el objeto complejo es: ";
+  cout << "el objeto complejo de la suma es: ";
   cout << c1;
   complejo c3=c1+c2;
+  cout << "el objeto complejo de la resta es: ";
+  cout << c2;
 
-  cout << "el objeto complejo es: ";
+  cout << "el objeto complejo de la multiplicacion es: ";
   cout << c3;
+  cout<<"el objeto complejo de la division es:";
+  cout<< c3;
   cout << "el objeto complejo conjugado es: ";
   cout << ~c3;
   return 0;
 
 
 }
+
