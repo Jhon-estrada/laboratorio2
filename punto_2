@@ -214,7 +214,7 @@ class rectangulo{
     vertice vertice1;
     vertice vertice2;
     vertice vertice3;
-    vertice vertice4;
+
 
     double rec1, rec2, rec3;
     rectangulo(int x1,int y1,int x2,int y2, int x3,int y3);
@@ -250,6 +250,15 @@ double rectangulo::perimetro()
 {
     double resultado  = 2*(rec1+rec2);
     return resultado;
+}
+
+double rectangulo::area()
+{
+    double resultado = rec1*rec2;
+    return resultado;
+}
+
+double rectangulo::getrecvert()
 {
    return rec1;
 }
@@ -261,12 +270,13 @@ double rectangulo::getrechorz()
 
 
 
+
 class ConstructorFigura{
 public:
     static circulo builder(vertice vertice1){}
     static triangulo builder(vertice vertice1,vertice vertice2,vertice vertice3){}
     static rectangulo builder(vertice vertice1,vertice vertice2,vertice vertice3,vertice vertice4){}
-    //static pentagono builder(vertice vertice1,vertice vertice2){}
+    static pentagono builder(vertice vertice1,vertice vertice2){}
 
 };
 static circulo builder(vertice vertice1){
@@ -285,11 +295,11 @@ static rectangulo builder(vertice v1,vertice v2,vertice v3 ){
     return rectangulo;
 
 };
-/*static pentagono builder(vertice v1,vertice v2 ){
+static pentagono builder(vertice v1,vertice v2 ){
     pentagono pentagono = pentagono::makepentagono(v1.getX(),v1.getY(),v2.getX(),v2.getY());
     cout<<"Perimetro del pentagono: "<<pentagono.perimetro()<<"\nArea del pentagono: "<<pentagono.area()<<endl;
     return pentagono;
-};*/
+   };
 int main()
 {
     //vertice vertice(9,5);
@@ -309,7 +319,6 @@ int main()
     vertice vertice1(3,4);
     vertice vertice2(5,6);
     builder(vertice1,vertice2);
-    
-    
+
 
 }
